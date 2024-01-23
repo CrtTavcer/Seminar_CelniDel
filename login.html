@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+	
+</head>
+<body onload="oPrijavi()">
+	<form id="prijava" onsubmit="getToken(); return false" class="form">
+		<h1>Login</h1>
+		<div class="form-group">
+			<label for="upime">Uporabniško ime:</label>
+			<input type="text" id="upime" required/>
+		</div>
+		<div class="form-group">
+			<label for="geslo">Geslo:</label>
+			<input type="password" id="geslo" required/>
+		</div>
+		<input type="submit" value="Prijava"/>
+	</form>
+
+	<div class="login-signup">
+		<a href="registracija.html">Signup</a>
+	</div>
+	<!--
+	<button onclick="checkToken()">Check Token</button>
+	<p id="potrditev"></p>
+	-->
+	<script>
+		function getToken() {
+			var username = document.getElementById("upime").value;
+			var password = document.getElementById("geslo").value;
+
+			var xhr = new XMLHttpRequest();
+			xhr.open('POST', 'http://localhost/mojProjekt/zaledje/JWT_create.php', true);
+			xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+			var params = 'upime=' + encodeURIComponent(username) + '&geslo=' + encodeURIComponent(password);
+
+			xhr.onload = function() {
+				if (xhr.status === 200) {
+					var data = JSON.parse(xhr.responseText);
+					if (data.token) {
+						window.localStorage.setItem("access_token", data["token"]);
+						oPrijavi();
+						var jwt = data.token;
+						console.log('JWT: ' + jwt);
+					} else {
+						console.log('Authentication failed');
+					}
+				} else {
+					console.log('Error: ' + xhr.status);
+					oPrijavi();
+				}
+			};
+
+			xhr.send(params);
+		}
+		
+		function checkToken() {
+			var xhr = new XMLHttpRequest();
+			xhr.open('POST', 'http://localhost/mojProjekt/zaledje/JWT_check.php', true);
+			xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+			xhr.setRequestHeader("Authorization", "Bearer " + window.localStorage.getItem("access_token"));
+			xhr.onload = function() {
+				if (xhr.status === 200) {
+					console.log('Token valid');
+					document.getElementById("potrditev").innerHTML = "Žeton veljaven";
+				} else {
+					console.log('Error: ' + xhr.status);
+					document.getElementById("potrditev").innerHTML = "Žeton neveljaven";
+				}
+			};
+			xhr.send();
+		}
+		
+		function oPrijavi() {
+			var zeton = window.localStorage.getItem('access_token');
+			if(zeton != null && zeton != ""){
+				window.location.href = 'main.html';
+			}
+			else{
+				document.getElementById("prijava").style.display = "block";
+				alert("Prijava ni uspela!");
+				document.getElementById("upime").value = "";
+				document.getElementById("geslo").value = "";
+			}
+		}
+	</script>
+</body>
+</html>
+<style>
+	body {
+		background-color: #f2f2f2;
+		font-family: Arial, Helvetica, sans-serif;
+		text-align: center;
+	}
+
+	h1 {
+		color: #4d4d4d;
+	}
+
+	p {
+		color: #4d4d4d;
+	}
+
+	a {
+		color: blue;
+	}
+
+	.login-signup {
+		position: absolute;
+		top: 10px;
+		right: 30px;
+		font-size: large;
+	}
+
+	.form {
+		width: 300px;
+		margin: 0 auto;
+		margin-top: 100px;
+		background-color: #f2f2f2;
+		padding: 40px;
+		border-radius: 20px;
+		box-shadow: 0px 0px 10px 0px #000;
+	}
+
+	.form label {
+		display: block;
+		margin-bottom: 10px;
+	}
+
+	.form input[type="text"],
+	.form input[type="password"] {
+		width: 100%;
+		padding: 10px;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		margin-bottom: 20px;
+	}
+
+	.form input[type="submit"] {
+		width: 100%;
+		padding: 10px;
+		background-color: #4CAF50;
+		color: white;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+
+	.form input[type="submit"]:hover {
+		background-color: #45a049;
+	}
+
+	#potrditev {
+		margin-top: 20px;
+		font-weight: bold;
+	}
+</style>

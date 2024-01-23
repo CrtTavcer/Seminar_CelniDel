@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vsi vnosi</title>
+    
+</head>
+<body onload="oPrijavi()">
+    <h1>Vsi vnosi uporabnika</h1>
+    <div class="container text-center">
+        <div id="oPrijavi"></div>
+        <table id="vnosiTable"></table>
+        <script src="JS/ledger.js"></script>
+
+        <script>
+        function oPrijavi() {
+            var zeton = window.localStorage.getItem('access_token');
+            if(zeton != null && zeton != ""){
+                izpis_vnosev();
+            }
+            else{
+                document.getElementById("oPrijava").style.display = "block";
+            }
+        } 
+        </script>
+    </div>
+</body>
+</html>
+<style>
+   table {
+        font-size: large;
+        width: 100%;
+        border-collapse: collapse;
+        overflow: auto;
+    }
+    
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    th {
+        background-color: #cccccc;
+    }
+</style>

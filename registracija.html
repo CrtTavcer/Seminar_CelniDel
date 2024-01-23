@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registracija</title>
+</head>
+<body>
+    <script src="JS/uporabniki.js"></script>
+    <div class="center">
+        <form id="obrazec" onsubmit="novUporabnik(); return false;">
+            <label for="vzdevek">Vzdevek:</label><br>
+            <input type="text" name="vzdevek" required/> <br>
+            
+            <label for="geslo">Geslo:</label><br>
+            <input type="password" name="geslo" required/> <br>
+            
+            <label for="ime">Ime:</label><br>
+            <input type="text" name="ime" required/> <br>
+
+            <label for="priimek">Priimek:</label><br>
+            <input type="text" name="priimek" required/> <br>
+            
+            <label for="email">Email:</label><br>
+            <input type="email" name="email" required/> <br>
+            
+            <input type="submit" value="Vpiši" onsubmit="redirectToLogin()" />
+        </form>
+        <div id="odgovor"></div>
+    </div>
+    
+   
+
+</body>
+</html>
+<style>
+    .center{
+        margin: auto;
+        width: 50%;
+        
+        padding: 100px;
+    }
+    body {
+        background-color: #f2f2f2;
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+    }
+</style>

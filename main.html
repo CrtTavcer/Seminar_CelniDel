@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Include Chart.js library -->
+    
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="APIs.html">mojProjekt</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="vsi_vnosi.html">Vsi vnosi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="posodobiUporabnika.html">Posodobi podatke</a>
+                </li>
+                <li class="nav-item" >
+                    <a class="nav-link" href="login.html" onclick="logout()">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div style="display: flex;">
+        <div style="max-width: 5000px; flex: 1;">
+            <table id="monthlyTable">
+                <thead>
+                    <tr>
+                        <th>Mesec</th>
+                        <th>Prihodki</th>
+                        <th>Odhodki</th>
+                        <th>Razlika</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Table content will be dynamically updated here -->
+                </tbody>
+            </table>
+        </div>
+        <div style="flex: 1;">
+            <canvas id="graf" width="40" height="20"></canvas>
+        </div>
+    </div>
+
+       
+      
+       
+        
+    <!--vnašanje novega vnosa-->
+    <div class="container mt-4" style="max-width: 5000;">
+        <button class="btn btn-primary" id="gumbZaVnos" onclick="dodaj_vnos()">Dodaj vnos</button>
+        <form id="vnosForm" style="display: none;"><br>
+            <div class="form-group">
+                <input type="number" class="form-control" id="vsota" name="vsota" placeholder="Vsota" required>
+            </div>
+            <div class="form-group">
+                <input type="number" class="form-control" id="vrsta" name="ID_vrsta" placeholder="Vrsta" required>
+            </div>
+            <div class="form-group">
+                <input type="number" class="form-control" id="namen" name="ID_namen" placeholder="Namen" required>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="submitVnos()">Potrdi</button>
+        </form>
+    </div>
+    
+    <div id="potrditev"></div> <!--potrditev vnosa-->
+
+    
+
+    <script src="JS/ledger.js"></script>
+    <script src="JS/preveriZeton.js"></script>
+    <script src="JS/uporabniki.js"></script>
+    <script src="JS/grafi.js"></script>
+    <script src="JS/bilanca.js"></script>
+    
+    
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Call mesecnaBilanca when the page loads
+            graf()
+            mesecnaBilanca();
+        });
+
+
+
+        function logout() {
+            window.localStorage.removeItem('access_token');
+        }
+
+        function dodaj_vnos() {
+            document.getElementById("gumbZaVnos").innerHTML = "Skrij dodajanje";
+            var vnosForm = document.getElementById("vnosForm");
+            if (vnosForm.style.display === "none") {
+                vnosForm.style.display = "block";
+            } else {
+                document.getElementById("gumbZaVnos").innerHTML = "Dodaj vnos";
+                vnosForm.style.display = "none";
+            }
+        }
+
+        function submitVnos() {
+            document.getElementById("gumbZaVnos").innerHTML = "Dodaj vnos";
+            vnos(); //izvedemo funkcijo za dodajanje vnosa (v ledge.js)
+            var vsota = document.getElementById("vsota").value = "";
+            var vrsta = document.getElementById("vrsta").value = "";
+            var namen = document.getElementById("namen").value = "";
+            var vnosForm = document.getElementById("vnosForm");
+            vnosForm.style.display = "none"; // Hide the vnosForm after submitting
+            
+            setTimeout(function() {
+                document.getElementById("potrditev").style.display = "none";
+            }, 3000);
+        }
+
+        function oPrijavi() {
+                var zeton = window.localStorage.getItem('access_token');
+                if(zeton != null && zeton != ""){
+                    izpis_vnosev(); //izvedemo funkcijo za izpis vseh vnosev (v ledge.js)
+                    
+                }
+                else{
+                    document.getElementById("oPrijava").style.display = "block";
+                }
+            }
+            
+    </script>
+</body>
+</html>
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        overflow: auto;
+    }
+    
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    th {
+        background-color: #cccccc;
+    }
+    .container {
+        max-width: 500px;
+    }

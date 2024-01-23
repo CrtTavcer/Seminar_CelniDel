@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Šparovček</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Include Chart.js library -->
+</head>
+
+<link rel="stylesheet" href="stil.css"> <!--povezava na css datoteko-->
+
+<body>
+    <div class="login-signup">
+        <a href="prijava.php">Login</a> | <a href="registracija.php">Signup</a>
+    </div>
+
+    <h1>Šparovček</h1>
+    <p>Money manager je spletna aplikacija, ki omogoča spremljanje osebnih financ.</p>
+
+    <div style="max-width: 500px; margin: 0 auto;">
+        <canvas id="myPieChart"></canvas> <!-- Create a canvas element for the chart -->
+    </div>
+
+    <script src="pie.js"></script> <!-- Include pie.js file -->
+    
+    <h1 style="color: rgb(190, 207, 165);">Stolpični grafikon</h1>
+
+    <div style="max-width: 800px; margin: 0 auto;">
+        <canvas id="myBarChart"></canvas> <!-- Create a canvas element for the chart -->
+    </div>
+
+
+    <script src = "bar.js"></script>
+    
+
+
+</body>
+</html>
