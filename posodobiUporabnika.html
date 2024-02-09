@@ -12,17 +12,16 @@
         <form id="obrazec" onsubmit="posodobiUporabnika(); return false;">
             
             <label for="ime">Ime:</label>
-            <input type="text" name="ime" required/>
+            <input id="ime" type="text" name="ime" required/>
 
             <label for="priimek">Priimek:</label>
-            <input type="text" name="priimek" required/> 
+            <input id="priimek" type="text" name="priimek" required/> 
             
             <label for="geslo">Geslo:</label>
-            <input type="password" name="geslo" required/> 
+            <input id="geslo" type="password" name="geslo" required/> 
             
-
             <label for="email">Email:</label>
-            <input type="email" name="email" required/> 
+            <input id="email" type="email" name="email" required/> 
             
             <input type="submit" value="Posodobi" onsubmit="redirectToMain()" />
         </form>
@@ -35,6 +34,12 @@
                 alert("Uporabniški podatki uspešno posodobljeni!");
             }
         }
+
+        document.addEventListener("DOMContentLoaded", function() {
+        // Code to execute after the DOM content is fully loaded
+        podatki_uporabnika(); // Call the function to fetch user data
+        });
+
     </script>
 
 </body>

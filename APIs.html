@@ -3,9 +3,230 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>API Requests</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
-    <p>Tu pride dokumentacija in opis uporabljeni API-jev</p>
+<h1>API Zahtevki</h1>
+<p>Seznam vseh API zahtevkov, ki jih lahko uporabljamo v tem projektu.</p>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Pot</th>
+            <th>Metoda</th>
+            <th>Opis</th>
+            <th>Medijski tip</th>
+            <th>Vsebina zahtevka</th>
+            <th>Statusne kode in vsebina odgovora</th>
+            <th>Opombe</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>mojProjekt\zaledje\APIji\uporabniki\vzdevek</td>
+            <td>GET</td>
+            <td>Pridobi podatke prijavlenega uporabnika</td>
+            <td>JSON</td>
+            <td>{
+                "vzdevek": "______"
+            }</td>
+            <td>    200 OK. Uporabnik obstaja,<br>
+                404 Uporabnik ne obstaja</td>
+                <td></td>
+        </tr>
+
+        <tr>
+            <td>mojProjekt\zaledje\APIji\uporabniki</td>
+            <td>GET</td>
+            <td>Pridobi podatke vseh uporabnikov</td>
+            <td>JSON</td>
+            <td>/</td>
+            <td>200 OK</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>mojProjekt\zaledje\APIji\novUporabnik</td>
+            <td>POST</td>
+            <td>Ustvari nobvega uporabnika</td>
+            <td>JSON</td>
+            <td>{
+                "vzdevek": "______",
+                "ime": "______",
+                "priimek": "______",
+                "geslo": "______",
+                "email": "___@____"
+            }
+            </td>
+            <td>    201 Uporabnik ustvarjen,<br>
+                409 Uporabnik že obstaja,<br>
+                500 napaka na strežniku,<br>
+                400 bad request</td>
+                <td></td>
+            </tr>
+
+        <tr>
+            <td>mojProjekt\zaledje\APIji\uporabniki</td>
+            <td>PUT</td>
+            <td>Posodobi podatke prijavlenega uporabnika</td>
+            <td>JSON</td>
+            <td>{
+                "ime": "______",
+                "priimek": "______",
+                "geslo": "______",
+                "email": "___@____"
+            }
+            </td>
+            <td>    200 OK. Uporabnik obstaja,<br>
+                500 napaka na strežniku,<br>
+                404 Uporabnik ne obstaja</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>mojProjekt\zaledje\APIji\uporabniki</td>
+            <td>DELETE</td>
+            <td>Izbriši uporabnika</td>
+            <td>JSON</td>
+            <td>{
+                "vzdevek": "______"
+            }
+            </td>
+            <td>204 OK (no content),<br>
+                500 napaka na strežniku,<br>
+                404 Uporabnik ne obstaja</td>
+            <td>Ni v uporabi</td>
+        </tr>
+
+        <tr>
+            <td>mojProjekt\zaledje\APIji\ledger</td>
+            <td>GET</td>
+            <td>Pridobi vse vnose uporabnika</td>
+            <td>JSON</td>
+            <td>{
+                "vzdevek": "______"
+            }</td>
+            <td>200 OK,<br>
+                404 Uporabnik nima vnosev
+                <td></td>
+        </tr>
+
+        <tr>
+            <td>mojProjekt\zaledje\APIji\ledger</td>
+            <td>GET</td>
+            <td>Pridobi vnose vseh uporabnikov</td>
+            <td>JSON</td>
+            <td>/</td>
+            <td>200 OK,<br>
+                404 Ni vnosev</td>
+            </td>
+            <td>Ni v uporabi</td>
+        </tr>
+
+        <tr>
+            <td>mojProjekt\zaledje\APIji\ledger</td>
+            <td>POST</td>
+            <td>Nov vnos</td>
+            <td>JSON</td>
+            <td>{
+                "vsota": "______",
+                "ID_namen": "______",
+                "ID_vrsta": "______",
+            }
+            </td>
+            <td>201 Created,<br>
+            400 napaka pri dodajanju</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>mojProjekt\zaledje\APIji\ledger</td>
+            <td>DELETE</td>
+            <td>Izbriši vnos</td>
+            <td>JSON</td>
+            <td>{"ID_ledger":"____"}</td>
+            <td>204 No content,<br>
+                400 bad request</td>
+            <td>Ni v uporabi</td>
+        </tr>
+
+        <tr>
+            <td>mojProjekt\zaledje\APIji\ledger</td>
+            <td>DELETE</td>
+            <td>Izbriši vse vnose uporabnika</td>
+            <td>JSON</td>
+            <td>{"ID":"____"}</td>
+            <td>204 No content,<br>
+            400 bad request</td>
+            <td>Ni v uporabi</td>
+        </tr>
+
+        <tr>
+            <td>mojProjekt\zaledje\APIji\bilanca</td>
+            <td>GET</td>
+            <td>Pridobi bilanco uporabnika</td>
+            <td>JSON</td>
+            <td>{
+                "ID": "______"}
+            </td>
+            <td>200 OK,<br>
+                404 uporabnik nima bilance
+            </td>
+            <td></td>
+        </tr>
+
+
+        <tr>
+            <td>mojProjekt\zaledje\APIji\bilanca</td>
+            <td>GET</td>
+            <td>Pridobi bilanco vseh uporabnikov</td>
+            <td>JSON</td>
+            <td>/</td>
+            <td>200 OK,<br>
+            404 ni bilanc</td>
+            <td>Ni v uporabi</td>
+        </tr>
+
+        <tr>
+            <td>mojProjekt\zaledje\APIji\dropdownnamen</td>
+            <td>GET</td>
+            <td>Pridobi nemene za dropdown meni</td>
+            <td>JSON</td>
+            <td>/</td>
+            <td>200 OK,<br>
+            500 Error fetching</td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>mojProjekt\zaledje\APIji\dropdownvrsta</td>
+            <td>GET</td>
+            <td>Pridobi vrsto vnosa za dropdown</td>
+            <td>JSON</td>
+            <td>/</td>
+            <td>200 OK,<br>
+                500 Error fetching</td>
+            <td></td>
+        </tr>
+
+
+    </tbody>
+</table>
+
 </body>
 </html>

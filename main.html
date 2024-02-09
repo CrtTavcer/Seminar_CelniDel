@@ -62,10 +62,14 @@
                 <input type="number" class="form-control" id="vsota" name="vsota" placeholder="Vsota" required>
             </div>
             <div class="form-group">
-                <input type="number" class="form-control" id="vrsta" name="ID_vrsta" placeholder="Vrsta" required>
+                <select class="form-control" id="vrsta" name="ID_vrsta" required>
+                    <!-- Options for vrsta will be dynamically populated here -->
+                </select>
             </div>
             <div class="form-group">
-                <input type="number" class="form-control" id="namen" name="ID_namen" placeholder="Namen" required>
+                <select class="form-control" id="namen" name="ID_namen" required>
+                    <!-- Options for namen will be dynamically populated here -->
+                </select>
             </div>
             <button type="button" class="btn btn-primary" onclick="submitVnos()">Potrdi</button>
         </form>
@@ -88,6 +92,8 @@
             // Call mesecnaBilanca when the page loads
             graf()
             mesecnaBilanca();
+            pridobiVrste();  // Call function to fetch options for vrsta
+            pridobiNamene(); // Call function to fetch options for namen
         });
 
 
