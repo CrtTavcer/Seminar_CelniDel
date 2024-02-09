@@ -40,7 +40,7 @@ function izpis_vnosev() { //izpiše vse vnose uporabnika
 
     xhr.send();
 }
-
+/*
 function izpis_vnosev10() { //izpiše zadnjih 10 vnosov uporabnika
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "http://localhost/mojProjekt/zaledje/APIji/ledger", true);
@@ -83,7 +83,7 @@ function izpis_vnosev10() { //izpiše zadnjih 10 vnosov uporabnika
 
     xhr.send();
 }
-
+*/
 
 
 function vnos() { //vnese nov vnos
@@ -131,3 +131,64 @@ function vnos() { //vnese nov vnos
     xhr.send(JSONdata);
 }
 
+
+function pridobiVrste() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://localhost/mojProjekt/zaledje/APIji/dropdownvrsta", true);	
+    xhr.setRequestHeader("Accept", "application/json");
+    xhr.setRequestHeader("Content-Type", "application/json"); // Add this line
+    xhr.setRequestHeader("Authorization", "Bearer " + window.localStorage.getItem("access_token"));
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                var vrste = JSON.parse(xhr.responseText);
+                populateDropdownVrsta("vrsta", vrste);
+            } else {
+                console.error("Error fetching vrste: " + xhr.status + " " + xhr.statusText);
+            }
+        }
+    };
+
+    xhr.send();
+}
+function pridobiNamene() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://localhost/mojProjekt/zaledje/APIji/dropdownnamen", true);	
+    xhr.setRequestHeader("Accept", "application/json");
+    xhr.setRequestHeader("Content-Type", "application/json"); // Add this line
+    xhr.setRequestHeader("Authorization", "Bearer " + window.localStorage.getItem("access_token"));
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                var nameni = JSON.parse(xhr.responseText);
+                populateDropdownNamen("namen", nameni);
+            } else {
+                console.error("Error fetching nameni: " + xhr.status + " " + xhr.statusText);
+            }
+        }
+    };
+
+    xhr.send();
+}
+
+function populateDropdownNamen(id, options) {
+    var dropdown = document.getElementById(id);
+    options.forEach(function(option) {
+        var optionElement = document.createElement("option");
+        optionElement.value = option.ID_namen; // Use ID_namen for value
+        optionElement.textContent = option.kategorija; // Use kategorija for text content
+        dropdown.appendChild(optionElement);
+    });
+}
+
+function populateDropdownVrsta(id, options) {
+    var dropdown = document.getElementById(id);
+    options.forEach(function(option) {
+        var optionElement = document.createElement("option");
+        optionElement.value = option.ID_vrsta; // Use ID_namen for value
+        optionElement.textContent = option.vrsta; // Use kategorija for text content
+        dropdown.appendChild(optionElement);
+    });
+}
