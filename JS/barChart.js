@@ -1,6 +1,4 @@
-
-
-function graf() { //pridoni vnose uporabnika in jih prikaže v grafu
+function barGraf() { //pridoni vnose uporabnika in jih prikaže v grafu
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "http://localhost/mojProjekt/zaledje/APIji/ledger", true);	
     xhr.setRequestHeader("Accept", "application/json");
@@ -48,8 +46,8 @@ function createGraph(data) {
     var labels = Object.keys(data);
     var values = Object.values(data);
 
-    var ctx = document.getElementById('graf').getContext('2d');
-    var myChart = new Chart(ctx, {
+    var ctxBar = document.getElementById('barChart').getContext('2d');
+    var BarChart = new Chart(ctxBar, {
         type: 'bar',
         data: {
             labels: labels,

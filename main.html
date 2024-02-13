@@ -7,22 +7,26 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Include Chart.js library -->
     
-</head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="APIs.html">mojProjekt</a>
+        <a class="navbar-brand" href="APIs.html" title="Dokumentacija APIjev">mojProjekt</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="vsi_vnosi.html">Vsi vnosi</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="grafi.html">Grafi</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="posodobiUporabnika.html">Posodobi podatke</a>
                 </li>
-                <li class="nav-item" >
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
                     <a class="nav-link" href="login.html" onclick="logout()">Logout</a>
                 </li>
             </ul>
@@ -45,9 +49,11 @@
                 </tbody>
             </table>
         </div>
-        <div style="flex: 1;">
-            <canvas id="graf" width="40" height="20"></canvas>
-        </div>
+
+       <!--  <div style="flex: 1; display: flex; justify-content: center;">
+            <canvas id="graf" width="40" height="15"></canvas>
+        </div> -->
+    
     </div>
 
        
@@ -75,7 +81,7 @@
         </form>
     </div>
     
-    <div id="potrditev"></div> <!--potrditev vnosa-->
+    <div id="potrditev" class="text-center"></div> <!--potrditev vnosa-->
 
     
 
@@ -84,9 +90,11 @@
     <script src="JS/uporabniki.js"></script>
     <script src="JS/grafi.js"></script>
     <script src="JS/bilanca.js"></script>
+
     
     
     <script>
+
 
         document.addEventListener('DOMContentLoaded', function() {
             // Call mesecnaBilanca when the page loads
@@ -104,6 +112,12 @@
 
         function dodaj_vnos() {
             document.getElementById("gumbZaVnos").innerHTML = "Skrij dodajanje";
+            var vrstaDropdown = document.getElementById("vrsta");
+            var namenDropdown = document.getElementById("namen");
+            vrstaDropdown.innerHTML = ""; // Clear vrsta dropdown
+            namenDropdown.innerHTML = ""; // Clear namen dropdown
+            pridobiVrste();  // Call function to fetch options for vrsta
+            pridobiNamene(); // Call function to fetch options for namen
             var vnosForm = document.getElementById("vnosForm");
             if (vnosForm.style.display === "none") {
                 vnosForm.style.display = "block";
@@ -140,12 +154,17 @@
             
     </script>
 </body>
+<!-- <footer>
+    <p>&copy; 2024 mojProjekt</p>
+</footer> -->
 </html>
 <style>
     table {
-        width: 100%;
+        width: 70%;
         border-collapse: collapse;
         overflow: auto;
+        margin: 0 auto; /* Center the table horizontally */
+        border: 1px solid #ddd; /* Add border lines */
     }
     
     th, td {
@@ -157,6 +176,30 @@
     th {
         background-color: #cccccc;
     }
+    
     .container {
         max-width: 500px;
     }
+
+    .navbar {
+        margin-bottom: 20px;
+    }
+    
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        height: 80vh; /* Set the height to 80% of the viewport height */
+        background-color: #ffffff;
+    }
+
+    footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #e4e4e4;
+        color: black;
+        text-align: center;
+        border-top: 1px solid #ddd; /* Add border line at the top */
+    }
+</style>

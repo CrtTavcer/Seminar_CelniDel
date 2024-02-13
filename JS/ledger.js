@@ -123,7 +123,7 @@ function vnos() { //vnese nov vnos
                 location.reload();
             } else {
                 console.log("vnos neuspešen");
-                document.getElementById("potrditev").innerHTML = "Error adding entry: " + xhr.status + " " + xhr.statusText;
+                document.getElementById("potrditev").innerHTML = "Vnos neuspešen";
             }
         }
     };
@@ -187,8 +187,8 @@ function populateDropdownVrsta(id, options) {
     var dropdown = document.getElementById(id);
     options.forEach(function(option) {
         var optionElement = document.createElement("option");
-        optionElement.value = option.ID_vrsta; // Use ID_namen for value
-        optionElement.textContent = option.vrsta; // Use kategorija for text content
+        optionElement.value = option.ID_vrsta; 
+        optionElement.textContent = option.vrsta; 
         dropdown.appendChild(optionElement);
     });
 }

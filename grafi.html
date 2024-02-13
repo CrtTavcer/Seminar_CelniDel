@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Grafi</title>
+</head>
+<body>
+    <h1 style="color: rgb(190, 207, 165); text-align: center;">Tortni grafikon porabe po kategoriji</h1>
+    <div style="max-width: 500px; margin: 0 auto; text-align: center;">
+        <canvas id="pieChart" width="200" height="150"></canvas>
+    </div>
+    <h1 style="color: rgb(190, 207, 165); text-align: center;">Stolpični grafikon porabe po dnevih</h1>
+    <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+        <canvas id="barChart" width="400" height="150"></canvas>
+    </div>
+
+
+   <script  src="JS/barChart.js"></script>
+    <script src="JS/pieChart.js"></script>
+
+    <script>
+         document.addEventListener('DOMContentLoaded', function() {
+            pieGraf();
+            barGraf();
+        }); 
+    </script>
+</body>
+</html>
+<style>
+    body {
+    background-color: #f2f2f2;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+</style>

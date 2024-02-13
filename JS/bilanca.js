@@ -30,6 +30,21 @@ function mesecnaBilanca() { // Funkcija za prikaz mesečne bilance v tabeli
                     sumOdhodki += parseFloat(entry.vsota_odhodki);
                 });
                 // Dodaj celico za vsoto
+                // Pridobi trenutni mesec
+                var Month = new Date().getMonth() + 1;
+                var monthNumber = Month + 1;
+                // Iteriraj skozi vse mesece
+                for (var i = 0; i < 12 - Month; i++) { // Dodaj prazne celice za preostale mesece
+                    var row = tableBody.insertRow();
+                    var monthName = new Date(0, monthNumber - 1).toLocaleString('en-US', { month: 'short' });
+                    row.insertCell(0).textContent = monthName;
+                    // Pusti prazne celice za prihodke, odhodke in razliko
+                    row.insertCell(1);
+                    row.insertCell(2);
+                    row.insertCell(3);
+                    // Povečaj trenutni mesec za naslednji cikel
+                    monthNumber++;
+                }
                 var sumRow = tableBody.insertRow();
                 sumRow.insertCell(0).textContent = "Vsota";
                 sumRow.insertCell(1).textContent = sumPrihodki.toFixed(2);
